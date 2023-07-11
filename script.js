@@ -56,5 +56,31 @@ function changeColor(e){
     else if(drawCondition && mode == 'eraser'){
         e.target.style.backgroundColor = 'white';
     }
+    else if(drawCondition && mode == 'rainbow'){
+        rgb = returnRainbow();
+        e.target.style.backgroundColor = `rgb(${rgb[0]},${rgb[1]},${rgb[2]}, 1)`;
+    }
     
+}
+function returnRainbow(){
+    let arr = [Math.random(), Math.random(), Math.random()];
+    for(let i = 0; i <3; i++){
+        arr[i] = (Math.round(arr[i] *0.99 ));
+    }
+    let sum = 0;
+    for(let i = 0; i <3; i++){
+        sum += arr[i];
+    }
+    if(sum == 0){
+        arr[0] = 1;
+    }
+    else if (sum == 3){
+        arr[0] = 0;
+    }
+    for(let i = 0; i <3; i++){
+        arr[i] /= 1.1;
+        arr[i] *= 255; 
+    }
+    
+    return arr;
 }
