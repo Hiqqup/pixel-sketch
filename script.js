@@ -1,12 +1,21 @@
 const canvas = document.querySelector('.canvas');
 
+const colorContainer = document.querySelector('.color-container')
 const colorPicker = document.querySelector('#color-picker');
+
+colorPicker.addEventListener('input', ()=>{
+    colorContainer.style.backgroundColor = colorPicker.value;
+});
+
 let mode = 'brush';
 
 const buttons = document.querySelectorAll('.buttons button');
 buttons.forEach((button) => {
     button.addEventListener('click', (e) =>{
-        mode = button.id; 
+        if(button.id != 'clear'){
+            mode = button.id; 
+            toggleCurrentMode();
+        }
     });
     
 });
@@ -19,16 +28,18 @@ slider.addEventListener('input', (e) => {
     rerenderInfo();
     rerenderGrid();
 });
-clear.addEventListener('click', () => {
+clear.addEventListener('click', reset);
+
+reset();
+
+function reset(){
     slider.value = 16;
     colorPicker.value = 'black';
     mode = 'brush';
+    toggleCurrentMode();
     rerenderInfo();
     rerenderGrid();
-});
-rerenderGrid();
-
-
+}
 function rerenderGrid(){
     canvas.innerHTML = '';
     generateGrid(slider.value, slider.value);
@@ -63,6 +74,11 @@ function changeColor(e){
         e.target.style.backgroundColor = `rgb(${rgb[0]},${rgb[1]},${rgb[2]}, 1)`;
     }
     
+}
+
+function toggleCurrentMode(){
+    [].forEach.call(document.querySelectorAll('.toggled'),(b) => b.classList.remove('toggled'));
+    buttons.forEach(button =>{ if(button.id==mode)button.classList.add('toggled')});
 }
 function returnRainbow(){
     let arr = [Math.random(), Math.random(), Math.random()];
