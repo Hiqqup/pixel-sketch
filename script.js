@@ -3,6 +3,8 @@ const canvas = document.querySelector('.canvas');
 const colorContainer = document.querySelector('.color-container')
 const colorPicker = document.querySelector('#color-picker');
 
+const deleteSfx = new Audio('./resources/delete-sfx.mp3');
+
 colorPicker.addEventListener('input', ()=>{
     colorContainer.style.backgroundColor = colorPicker.value;
 });
@@ -30,15 +32,19 @@ slider.addEventListener('input', (e) => {
 });
 clear.addEventListener('click', reset);
 
-reset();
+rerenderGrid();
+toggleCurrentMode();
+
 
 function reset(){
     slider.value = 16;
     colorPicker.value = 'black';
+    colorContainer.style.backgroundColor = colorPicker.value;
     mode = 'brush';
     toggleCurrentMode();
     rerenderInfo();
     rerenderGrid();
+    deleteSfx.play();
 }
 function rerenderGrid(){
     canvas.innerHTML = '';

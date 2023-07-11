@@ -70,6 +70,11 @@ body{
     padding: 4px;
     border-radius: 8px;
     transition: all .07s ease;
+    appearance: none;
+}
+#size-slider{
+    appearance: auto;
+    color: white;
 }
 #size-info{
     color: white;
