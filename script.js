@@ -21,6 +21,8 @@ slider.addEventListener('input', (e) => {
 });
 clear.addEventListener('click', () => {
     slider.value = 16;
+    colorPicker.value = 'black';
+    mode = 'brush';
     rerenderInfo();
     rerenderGrid();
 });
@@ -51,7 +53,7 @@ function generateGrid(width, height){
 function changeColor(e){
     const drawCondition = e.type === 'mouseover' && e.buttons==1 || e.type === 'mousedown';
     if (drawCondition && mode == 'brush'){
-        e.target.style.backgroundColor = 'black';
+        e.target.style.backgroundColor= colorPicker.value;
     }
     else if(drawCondition && mode == 'eraser'){
         e.target.style.backgroundColor = 'white';
