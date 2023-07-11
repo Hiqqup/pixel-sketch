@@ -1,12 +1,25 @@
 const canvas = document.querySelector('.canvas');
 const clear = document.querySelector('#clear');
+const slider = document.querySelector('#size-slider');
+const sizeInfo = document.querySelector('#size-info');
 
+slider.addEventListener('input', (e) => {
+    rerenderInfo();
+    rerenderGrid();
+});
 clear.addEventListener('click', () => {
-    canvas.innerHTML = '';
-    generateGrid(16, 16);
+    slider.value = 16;
+    rerenderInfo();
+    rerenderGrid();
 });
 generateGrid(16, 16);
-
+function rerenderGrid(){
+    canvas.innerHTML = '';
+    generateGrid(slider.value, slider.value);
+}
+function rerenderInfo(){
+    sizeInfo.textContent = slider.value + 'x' +slider.value;
+}
 function generateGrid(width, height){
     for(let i =0; i<height;i++){
         const row = document.createElement('div');
