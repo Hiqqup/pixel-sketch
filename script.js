@@ -1,4 +1,16 @@
 const canvas = document.querySelector('.canvas');
+
+const colorPicker = document.querySelector('#color-picker');
+let mode = 'brush';
+
+const buttons = document.querySelectorAll('.buttons button');
+buttons.forEach((button) => {
+    button.addEventListener('click', (e) =>{
+        mode = button.id; 
+    });
+    
+});
+
 const clear = document.querySelector('#clear');
 const slider = document.querySelector('#size-slider');
 const sizeInfo = document.querySelector('#size-info');
@@ -12,13 +24,15 @@ clear.addEventListener('click', () => {
     rerenderInfo();
     rerenderGrid();
 });
-generateGrid(16, 16);
+rerenderGrid();
+
+
 function rerenderGrid(){
     canvas.innerHTML = '';
     generateGrid(slider.value, slider.value);
 }
 function rerenderInfo(){
-    sizeInfo.textContent = slider.value + 'x' +slider.value;
+    sizeInfo.textContent = slider.value + ' x ' +slider.value;
 }
 function generateGrid(width, height){
     for(let i =0; i<height;i++){
@@ -35,8 +49,12 @@ function generateGrid(width, height){
     }
 }
 function changeColor(e){
-    if (e.type === 'mouseover' && e.buttons==1 || e.type === 'mousedown'){
+    const drawCondition = e.type === 'mouseover' && e.buttons==1 || e.type === 'mousedown';
+    if (drawCondition && mode == 'brush'){
         e.target.style.backgroundColor = 'black';
+    }
+    else if(drawCondition && mode == 'eraser'){
+        e.target.style.backgroundColor = 'white';
     }
     
 }
