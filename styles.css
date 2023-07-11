@@ -1,3 +1,5 @@
+    
+
 body{
     height: 100vh;
     margin: 0;
@@ -19,7 +21,7 @@ body{
 
 .main{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     flex: 3;
     align-items: center;
 }
@@ -29,7 +31,26 @@ body{
     background-color: black;
     padding:16px;
     align-items: center;
+    margin-right: 200px;
 }
 .buttons button, .buttons input{
     width: 100px;
 }
+.canvas{
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height: 500px;
+    background-color: white;
+    flex-basis: 500px;
+    flex-shrink: 1;
+}
+
+.gridRow, .gridEl{
+    display: flex;
+    flex: 1;
+}
+.toggled{
+    background-color: black;
+}
+
