@@ -1,4 +1,10 @@
 const canvas = document.querySelector('.canvas');
+const clear = document.querySelector('#clear');
+
+clear.addEventListener('click', () => {
+    canvas.innerHTML = '';
+    generateGrid(16, 16);
+});
 generateGrid(16, 16);
 
 function generateGrid(width, height){
