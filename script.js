@@ -67,6 +67,7 @@ function generateGrid(width, height){
         canvas.appendChild(row);
     }
 }
+let deg = 0;
 function changeColor(e){
     const drawCondition = e.type === 'mouseover' && e.buttons==1 || e.type === 'mousedown';
     if (drawCondition && mode == 'brush'){
@@ -76,8 +77,10 @@ function changeColor(e){
         e.target.style.backgroundColor = 'white';
     }
     else if(drawCondition && mode == 'rainbow'){
-        rgb = returnRainbow();
-        e.target.style.backgroundColor = `rgb(${rgb[0]},${rgb[1]},${rgb[2]}, 1)`;
+        
+        e.target.style.backgroundColor = `hsl(${deg},100%,50%)`;
+        deg = (deg + (360/7)) % 360;
+
     }
     
 }
@@ -85,26 +88,4 @@ function changeColor(e){
 function toggleCurrentMode(){
     [].forEach.call(document.querySelectorAll('.toggled'),(b) => b.classList.remove('toggled'));
     buttons.forEach(button =>{ if(button.id==mode)button.classList.add('toggled')});
-}
-function returnRainbow(){
-    let arr = [Math.random(), Math.random(), Math.random()];
-    for(let i = 0; i <3; i++){
-        arr[i] = (Math.round(arr[i] *0.99 ));
-    }
-    let sum = 0;
-    for(let i = 0; i <3; i++){
-        sum += arr[i];
-    }
-    if(sum == 0){
-        arr[0] = 1;
-    }
-    else if (sum == 3){
-        arr[0] = 0;
-    }
-    for(let i = 0; i <3; i++){
-        arr[i] /= 1.1;
-        arr[i] *= 255; 
-    }
-    
-    return arr;
 }
